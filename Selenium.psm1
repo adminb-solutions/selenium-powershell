@@ -1,5 +1,17 @@
 [System.Reflection.Assembly]::LoadFrom("$PSScriptRoot\assemblies\WebDriver.dll")
 [System.Reflection.Assembly]::LoadFrom("$PSScriptRoot\assemblies\WebDriver.Support.dll")
+
+function Start-SeRemote {
+    param(
+        # Uri of the remote selenium endpoint
+        [Parameter(Mandatory=$false)]
+        [String]
+        $Uri="http://localhost:4444/wd/hub"
+        )
+        $options = New-Object  "OpenQA.Selenium.Chrome.ChromeOptions"
+        New-Object -TypeName "OpenQA.Selenium.Remote.RemoteWebDriver" -ArgumentList $Uri,$options
+}
+
 function Start-SeChrome {
     New-Object -TypeName "OpenQA.Selenium.Chrome.ChromeDriver"
 }
